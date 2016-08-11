@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 
 class Courses extends React.Component {
   constructor(props) {
@@ -9,9 +10,11 @@ class Courses extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      courses: [{name: 'React', description: 'Its a course'}, {name: 'Javascript', description: 'Learn the basics'}],
-    });
+    $.get("http://localhost:3000/courses.json", (function(data){
+      this.setState({
+        courses: data.courses,
+      });
+    }).bind(this));
   }
 
   render() {
